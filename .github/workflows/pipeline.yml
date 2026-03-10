@@ -1,39 +1,33 @@
-name: "Estrutura de diretórios e arquivos"
+name: Pipeline de teste
 
 on:
   push:
     branches: [ master ]
-  workflow_dispatch:
-
-env:
-  NODE_VERSION: '18'
 
 jobs:
-  demonstrando_estrutura:
-    name: "Demonstrando estrutura basica"
+  hello-jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: checkout no código
         uses: actions/checkout@v4
 
-      - name: Mostrar estrutura .github/workflows
+      - name: Executar o hello World
+        run: echo "Hello Github Actions"
+
+      - name: Variáveis de Ambiente
         run: |
-          echo " == ESTRUTURA DE DIRETÓRIOS E ARQUIVOS == "
-          ls -la .github/workflows
-          echo ""
-          echo "Total de Workflows:"
-      - name: Elementos Obrigatórios do Workflows
+          echo "Sistema operacional ${{runner.os}}"
+          echo "Diretório Atual: ${pwd}"
+          echo "Data Atual: ${date}"
+          echo "Usuário: ${whoami}"
+
+      - name: Listar arquivos do repositório
         run: |
-          echo " == ELEMENTOS OBRIGATORIOS == "
-          echo " 1. name:"
-          echo " 2. on:"
-          echo " 3. jobs:"
-          echo " 4. runs-on:"
-          echo " 5. steps:"
-            
-      - name: Váriáveis e contexto
+          echo ls -la
+
+      - name: Vários comandos
         run: |
-          echo " VARIAVEIS E CONTEXTO "
-          echo "  Variável env: ${{env.NODE_VERSION}} "
-          
+          echo "Este é o Lab 01"
+          echo "Executado com sucesso"
+          echo "Pronto para os próximos desafios"
