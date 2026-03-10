@@ -1,0 +1,24 @@
+name: Pipeline Sequenciais
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  desenvolvimento:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Programando o backend
+        run: echo "Desenvolvido"
+
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testando a aplicação
+        run: echo "Testado"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployando a aplicação
+        run: echo "Deployado"
