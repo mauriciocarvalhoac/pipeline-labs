@@ -2,7 +2,7 @@ name: "Estrutura de diretórios e arquivos"
 
 on:
   push:
-    branches: [main]
+    branches: [ master ]
   workflow_dispatch:
 
 env:
