@@ -1,0 +1,36 @@
+name: Pipeline Sequenciais
+
+on:
+  push:
+    branches: # quando for feito um push na branch master ou na branch que está dentro da feature
+      - master
+      - "feature/**"
+    paths: #Quando for feito alguma alteração em qualquer arquivo na estrutura src/java, exceto nos testes em src/java/test
+      - "src/java/**"
+      - "!src/java/test/**"
+    paths-ignore: # Ignorar os arquivos denro da pasta docs e qualquer arquivos com extensão .properties
+      - "docs/**"
+      - "**.properties"
+
+jobs:
+  desenvolvimento: # Nome do Jobs
+    runs-on: ubuntu-latest # "Maquina virtual" onde o job estará rodando
+    steps:
+      - name: Programando o BackEnd #Nome do Step
+        run: echo "Backend Desenvolvido" # Ação do Step
+
+      - name: Programando o FrontEnd
+        run: echo "FrontEnd Desenvolvido"
+
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testando a aplicação
+        run: echo "Aplicação Testada"
+
+  deploy:
+    needs: [desenvolvimento, teste] #Esse Job só executará depois que o Job de desenvolvimento e teste forem executados
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployando a aplicação
+        run: echo "Deploy Concluído"

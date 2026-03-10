@@ -1,0 +1,34 @@
+name: Modulo Avançado
+
+on:
+  push:
+    branches:
+      - master
+env:
+  APP_NAME: Legislativo Digital
+  LOG_LEVEL: info
+
+permissions: #Permissões são READ, WRITE
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: desenvolvimento # Habilita as variaveis do ambiente  (producao, desenvolvimento)de acordo com o settings 
+    env:
+      API_URL: ${{vars.API_URL}}
+      DATABASE_URL: ${{vars.DATABASE_URL}}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions: #Informado em cada job que precisar de um privilégio diferente
+      pages: write # Permite fazer o deploy no github pages
+      id-token: write # necessário para autenticação
+    steps:
+      - name: Mostrar ambiente herdadoe e precedente
+        env:
+          APP_NAME: Legis Digital
+        run: |
+          echo "APP_NAME: ${APP_NAME}"
+          echo "LOG_LEVEL: ${LOG_LEVEL}"
+          echo "API_URL: ${API_URL}"
+          echo "DATABASE_URL: ${DATABASE_URL}"
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
