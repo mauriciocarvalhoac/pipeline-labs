@@ -35,7 +35,7 @@ jobs:
       - name: Váriáveis e contexto
         run: |
           echo " VARIAVEIS E CONTEXTO "
-          echo "  Variável env: ${env.NODE_VERSION} "
+          echo "  Variável env: ${{env.NODE_VERSION}} "
           echo " 1. "
           echo " 2. "
           echo " 3. "
