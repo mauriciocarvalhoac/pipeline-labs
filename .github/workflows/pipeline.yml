@@ -25,19 +25,15 @@ jobs:
           echo "Total de Workflows:"
       - name: Elementos Obrigatórios do Workflows
         run: |
-          echo " ELEMENTOS OBRIGATORIOS "
-          echo " 1. "
-          echo " 2. "
-          echo " 3. "
-          echo " 4. "
-          echo " 5. "
+          echo " == ELEMENTOS OBRIGATORIOS == "
+          echo " 1. name:"
+          echo " 2. on:"
+          echo " 3. jobs:"
+          echo " 4. runs-on:"
+          echo " 5. steps:"
             
       - name: Váriáveis e contexto
         run: |
           echo " VARIAVEIS E CONTEXTO "
           echo "  Variável env: ${{env.NODE_VERSION}} "
-          echo " 1. "
-          echo " 2. "
-          echo " 3. "
-          echo " 4. "
           
