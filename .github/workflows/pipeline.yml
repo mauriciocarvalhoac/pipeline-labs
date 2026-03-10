@@ -23,8 +23,7 @@ jobs:
           echo "Usuário: ${whoami}"
 
       - name: Listar arquivos do repositório
-        run: |
-          echo ls -la
+        run: ls -la
 
       - name: Vários comandos
         run: |
