@@ -10,6 +10,6 @@ jobs:
     name: "Dispara com Agendamento e Manualmente"
     runs-on: ubuntu-latest
     steps:
-      - name: Mostrar ambiente herdadoe e precedente
+      - name: "Mostrar uma mensagem de sucesso ao executar automaticamente"
         run: |
           echo "Executado com sucesso"
