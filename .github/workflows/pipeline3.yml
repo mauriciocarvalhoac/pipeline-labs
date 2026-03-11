@@ -26,9 +26,11 @@ jobs:
       - name: Mostrar ambiente herdadoe e precedente
         env:
           APP_NAME: Legis Digital
-        run: |
-          echo "APP_NAME: ${APP_NAME}"
-          echo "LOG_LEVEL: ${LOG_LEVEL}"
-          echo "API_URL: ${API_URL}"
-          echo "DATABASE_URL: ${DATABASE_URL}"
-          echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
+        run: | # github, env, vars, secrets, runner, steps, needs e matrix
+          echo "github.event_name: ${{ github.event_name }}"  #github
+          echo "runner.os: ${{ runner.os }}"                  #runner
+          echo "APP_NAME: ${APP_NAME}"                        #env
+          echo "LOG_LEVEL: ${LOG_LEVEL}"                      #env
+          echo "API_URL: ${API_URL}"                          #vars
+          echo "DATABASE_URL: ${DATABASE_URL}"                #vars
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"                #secrets
