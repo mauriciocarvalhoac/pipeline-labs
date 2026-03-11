@@ -1,0 +1,31 @@
+name: Issues Trigger Flow
+
+permissions: 
+  issues: write # Permite escrever comentários automaticos
+
+on:
+  issues: # Esse evento é disparado quando uma issue for criada no Github, na aba issue
+    types: [opened, edited, closed, labeled]  # Executa quando as isues são criadas editadas ou fechadas
+
+jobs:
+  issue-job:
+    name: "Job executado quando faz um issue"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Informações da Issue"
+        run: |
+          echo "Numero: ${{github.event.issue.number}}"
+          echo "Titulo: ${{github.event.issue.title}}"
+          echo "Usuario: ${{github.event.issue.user}}"
+
+      - name: "Responsta automatica quando uma issue for criada"
+        if: github.event.action == 'opened'
+        uses: actions/github-scripts@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.repo.number ,
+              owner: context.repo.owner, 
+              repo: context.repo.repo,
+              body: "Obrigado por abrir um Issue. Entraremos em contato em breve."
+            })
