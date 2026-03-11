@@ -2,7 +2,7 @@ name: Modulo Avançado
 
 on:
   schedule: # Executa com o agendamento às 23:59
-    - cron: 52 8 * * *
+    - cron: 55 8 * * *
   workflow_dispatch: # Roda clicando num botão que está no Github
 
 jobs:
