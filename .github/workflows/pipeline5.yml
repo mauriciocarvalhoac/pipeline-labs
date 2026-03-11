@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "Numero: ${{github.event.issue.number}}"
           echo "Titulo: ${{github.event.issue.title}}"
-          echo "Usuario: ${{github.event.issue.user}}"
+          echo "Usuario: ${{github.event.issue.user.login}}"
 
       - name: "Responsta automatica quando uma issue for criada"
         if: github.event.action == 'opened'
@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.repo.number ,
+              issue_number: context.issue.number,
               owner: context.repo.owner, 
               repo: context.repo.repo,
               body: "Obrigado por abrir um Issue. Entraremos em contato em breve."
