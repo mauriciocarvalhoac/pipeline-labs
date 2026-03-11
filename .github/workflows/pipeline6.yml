@@ -54,7 +54,7 @@ jobs:
       - name: "Deployando a aplicação no servidor do cliente"
         run: |
           echo "Realizando o Deploy da aplicação..."
-          echo "Gerou o WAR; Gerado em: ${date}" > build/app.war
+          echo "Gerou o WAR; Gerado em: ${date}"
           sleep 2
           echo "Deploy da Aplicação realizado com sucesso!"
               
