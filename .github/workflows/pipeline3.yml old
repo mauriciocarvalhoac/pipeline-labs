@@ -13,6 +13,7 @@ permissions: #Permissões são READ, WRITE
 
 jobs:
   deploy:
+    name: "Deploy da aplicação"
     runs-on: ubuntu-latest
     environment: producao # Habilita as variaveis do ambiente  (producao, desenvolvimento)de acordo com o settings 
     env:
