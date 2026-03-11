@@ -19,8 +19,11 @@ jobs:
       - name: Variáveis de Ambiente
         run: |
           echo "Sistema operacional ${{runner.os}}"
+          sleep 1
           echo "Diretório Atual: ${pwd}"
+          sleep 2
           echo "Data Atual: ${date}"
+          sleep 1
           echo "Usuário: ${whoami}"
 
       - name: Listar arquivos do repositório

@@ -1,0 +1,60 @@
+name: Code review, Test e Build
+
+on:
+  push:
+    branches: [master, develop]
+  workflow_dispatch: 
+
+jobs:
+  verificacao-codigo:
+    name: "Análisar o código da aplicação"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Verificando a sintaxe do código"
+        run: |
+          echo "Realizando o Code-review..."
+          sleep 3
+          echo "Code-review concluído com sucesso!"
+          
+      - name: "Fazendo upload de relatório do Code-review"
+        run: |
+          echo "Realizando o upload de relatórios do Code-review..."
+          echo "Codigo limpo; Classes ok; Gerado em: ${date}" > relatorio.txt
+          sleep 2
+          echo "Uploado do Code-review realizado com sucesso!"
+
+  teste-unitario:
+    name: "Realizar os testes unitários"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do projeto"
+        uses: actions/checkout@v4
+
+      - name: "Realizando a cobertura de testes do projeto"
+        run: |
+          echo "realizando a cobertura de testes unitários..."
+          sleep 2
+          echo "Cobertura dos testes está em 85% do código."
+          echo "Testes unitários realizados com sucesso!"
+          
+      - name: "Relatório dos Testes Unitários"
+        run: |
+          echo "Realizando o upload de relatórios dos testes unitários..."
+          echo "Teste de carga; Teste JUnit; Gerado em: ${date}" > relatorio.txt
+          sleep 2
+          echo "Upload do Teste Unitário realizado com sucesso!"
+          
+  deploy:
+    name: "Realizando o deploy da aplicação"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deployando a aplicação no servidor do cliente"
+        run: |
+          echo "Realizando o Deploy da aplicação..."
+          echo "Gerou o WAR; Gerado em: ${date}" > build/app.war
+          sleep 2
+          echo "Deploy da Aplicação realizado com sucesso!"
+              
