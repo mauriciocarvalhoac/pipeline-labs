@@ -49,6 +49,7 @@ jobs:
           
   deploy:
     name: "Realizando o deploy da aplicação"
+    needs: [teste-unitario,verificacao-codigo]
     runs-on: ubuntu-latest
     steps:
       - name: "Deployando a aplicação no servidor do cliente"

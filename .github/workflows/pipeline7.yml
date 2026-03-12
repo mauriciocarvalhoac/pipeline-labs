@@ -1,0 +1,37 @@
+name: "Disparos condicionais"
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_environments:
+        description: "Ambientes para o deploy:"
+        required: true
+        default: 'none'
+        type: choice
+        options:
+        - none
+        - development
+        - production
+    
+jobs:
+  disparos-condicionais:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Executar no ambiente de desenvolvimento"
+        if: github.event.inputs.deploy_environments == 'development'
+        run: |
+          echo "Executando no ambiente de desenvolvimeto"
+          echo "Evento: ${{ github.event_name }}"
+          echo "Executado com sucesso no aambiente de DESENVOLVIMENTO!!!"
+          
+      - name: "Executar no ambiente de Produção"
+        if: github.event.inputs.deploy_environments == 'production'
+        run: |
+          echo "Executando no ambiente de Produção"
+          echo "Evento: ${{ github.event_name }}"
+          echo "Executado com sucesso no aambiente de PRODUÇÃO!!!"
+          
+        
