@@ -15,10 +15,12 @@ on:
           - development
           - production
         
-
+env:
+  URL_DATABE: http://localhost:5432/consultorio
+  USER_DATABASE: ${{vars.USER_DATABASE}}
 jobs:
 
-  code-review:
+  code-review-front:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout do código"
@@ -29,7 +31,33 @@ jobs:
           echo "Verificando código..."
           echo "Código Verificado com sucesso"
 
-  test-verify:
+  test-verify-front:
+    needs: code-review-front
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Verificando Testes Unitários"
+        run: |
+          echo "Verificando JUnit e Mockito..."
+          echo "Teste Unitário Verificado com sucesso"
+
+  code-review-back:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Verificação do código"
+        run: |
+          echo "Verificando código..."
+          echo "Url: ${URL_DATABE}"
+          echo "Database: ${USER_DATABASE}"
+          echo "Código Verificado com sucesso"
+
+  test-verify-back:
+    needs: code-review-back
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout do código"
@@ -41,6 +69,26 @@ jobs:
           echo "Teste Unitário Verificado com sucesso"
 
   deploy-app:
+    needs: [test-verify-front, test-verify-back]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deploy da Aplicação"
+        run: |
+          echo "Deployando a aplicação..."
+          echo "Aplicação Deployada com sucesso"
+        
+      - name: "Tag para o ambiente de Produção"
+        if: github.event.inputs.choice_environment == 'production'
+        run: |
+          echo "TAG do Ambiente de PRODUÇÃO"
+
+      - name: "Tag para o ambiente de Desenvilvimento"
+        if: github.event.inputs.choice_environment == 'development'
+        run: |
+          echo "TAG do Ambiente de DESENVLVIMENTO"
+
+  deploy-app:
+    needs: [test-verify-front, test-verify-back]
     runs-on: ubuntu-latest
     steps:
       - name: "Deploy da Aplicação"
