@@ -5,7 +5,9 @@ on:
     branches:
       - master
 env:
+  VAR_WORKFLOW: "Variável do Workflow"
   APP_NAME: Legislativo Digital
+  APP_VERSION: 1.0.0
   LOG_LEVEL: info
 
 permissions: #Permissões são READ, WRITE
@@ -17,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: producao # Habilita as variaveis do ambiente  (producao, desenvolvimento)de acordo com o settings 
     env:
+      VAR_JOB: "Variável do JOB"
       API_URL: ${{vars.API_URL}}
       DATABASE_URL: ${{vars.DATABASE_URL}}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,6 +29,7 @@ jobs:
     steps:
       - name: Mostrar ambiente herdadoe e precedente
         env:
+          VAR_STEP: "Variável do STEP"
           APP_NAME: Legis Digital
         run: | # github, env, vars, secrets, runner, steps, needs e matrix
           echo "github.event_name: ${{ github.event_name }}"  #github

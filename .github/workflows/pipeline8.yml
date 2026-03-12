@@ -1,0 +1,59 @@
+name: Workflow do projeto Consultorio Médico
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+      branches: [master]
+  workflow_dispatch:
+    inputs:
+      choice_environment:
+        default: 'none'
+        type: choice
+        options:
+          - none
+          - development
+          - production
+        
+
+jobs:
+
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Verificação do código"
+        run: |
+          echo "Verificando código..."
+          echo "Código Verificado com sucesso"
+
+  test-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout do código"
+        uses: actions/checkout@v4
+
+      - name: "Verificando Testes Unitários"
+        run: |
+          echo "Verificando JUnit e Mockito..."
+          echo "Teste Unitário Verificado com sucesso"
+
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deploy da Aplicação"
+        run: |
+          echo "Deployando a aplicação..."
+          echo "Aplicação Deployada com sucesso"
+        
+      - name: "Tag para o ambiente de Produção"
+        if: github.event.inputs.choice_environment == 'production'
+        run: |
+          echo "TAG do Ambiente de PRODUÇÃO"
+
+      - name: "Tag para o ambiente de Desenvilvimento"
+        if: github.event.inputs.choice_environment == 'development'
+        run: |
+          echo "TAG do Ambiente de DESENVLVIMENTO"
