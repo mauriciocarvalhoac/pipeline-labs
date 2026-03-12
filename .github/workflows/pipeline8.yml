@@ -2,24 +2,26 @@ name: Workflow do projeto Consultorio Médico
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+    paths:
+      - "src/**"
   pull_request:
-      branches: [master]
+    branches: [master]
   workflow_dispatch:
     inputs:
       choice_environment:
-        default: 'none'
+        default: "none"
         type: choice
         options:
           - none
           - development
           - production
-        
+
 env:
   URL_DATABE: http://localhost:5432/consultorio
   USER_DATABASE: ${{vars.USER_DATABASE}}
 jobs:
-
   code-review-front:
     runs-on: ubuntu-latest
     steps:
@@ -76,7 +78,7 @@ jobs:
         run: |
           echo "Deployando a aplicação..."
           echo "Aplicação Deployada com sucesso"
-        
+
       - name: "Tag para o ambiente de Produção"
         if: github.event.inputs.choice_environment == 'production'
         run: |
