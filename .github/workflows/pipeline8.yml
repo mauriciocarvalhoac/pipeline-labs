@@ -86,22 +86,3 @@ jobs:
         if: github.event.inputs.choice_environment == 'development'
         run: |
           echo "TAG do Ambiente de DESENVLVIMENTO"
-
-  deploy-app:
-    needs: [test-verify-front, test-verify-back]
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Deploy da Aplicação"
-        run: |
-          echo "Deployando a aplicação..."
-          echo "Aplicação Deployada com sucesso"
-        
-      - name: "Tag para o ambiente de Produção"
-        if: github.event.inputs.choice_environment == 'production'
-        run: |
-          echo "TAG do Ambiente de PRODUÇÃO"
-
-      - name: "Tag para o ambiente de Desenvilvimento"
-        if: github.event.inputs.choice_environment == 'development'
-        run: |
-          echo "TAG do Ambiente de DESENVLVIMENTO"
